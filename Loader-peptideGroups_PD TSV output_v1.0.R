@@ -68,9 +68,9 @@ for (i in plexes) {
   if (minConfidence=="medium") keepRowIndices=which(peptideGroups[[i]]$Confidence=="High" | peptideGroups[[i]]$Confidence=="Medium")
   if (minConfidence=="low") keepRowIndices=which(peptideGroups[[i]]$Confidence=="High" | peptideGroups[[i]]$Confidence=="Medium" | peptideGroups[[i]]$Confidence=="Low")
 
-  if (dataType=="rawAbundance") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence master proteins. RAW abundance is available for ",length(keepColIndices)," samples in file.\n"))
-  if (dataType=="normAbundance") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence master proteins. Norm. Abundance is available for ",length(keepColIndices)," samples in file.\n"))
-  if (dataType=="abundanceRatio") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence master proteins. Ratio/GIS(126) is available for ",length(keepColIndices)," samples in file.\n"))
+  if (dataType=="rawAbundance") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence peptidoforms. RAW abundance is available for ",length(keepColIndices)," samples in file.\n"))
+  if (dataType=="normAbundance") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence peptidoforms. Norm. Abundance is available for ",length(keepColIndices)," samples in file.\n"))
+  if (dataType=="abundanceRatio") cat(paste0("Imported data for plex ",i," has ",originalRows,"x",ncol(peptideGroups[[i]])," rows x columns; ",length(keepRowIndices)," ",minConfidence,"+ confidence peptidoforms. Ratio/GIS(single channel) is available for ",length(keepColIndices)," samples in file.\n"))
 
 
 
@@ -139,6 +139,7 @@ if (length(plexes)>1) {
   cleanDat.new<-exprMat0[[plexes]]
 }
 
+## Enforce double-digit batch #s in sample (column) names
 colnames(cleanDat.new)<-gsub("b(\\d)\\.","b0\\1.",colnames(cleanDat.new))
 
 write.csv(cleanDat.new, file=outputFilename)
