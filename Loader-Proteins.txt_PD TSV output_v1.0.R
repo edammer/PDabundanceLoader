@@ -129,6 +129,9 @@ if (length(plexes)>1) {
   cleanDat.new<-exprMat0[[plexes]]
 }
 
+##Change single digit batch numbers to 0#.
+colnames(cleanDat.new)<-gsub("b(\\d)\\.(.*)","b0\\1.\\2",colnames(cleanDat.new))
+
 write.csv(cleanDat.new, file=outputFilename)
 
 ## end protein loader routine
